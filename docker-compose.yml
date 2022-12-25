@@ -1,0 +1,45 @@
+version: "3.9"
+services:
+  web:
+    container_name: "web"
+    build:
+      dockerfile: "./container/web/Dockerfile"
+    ports:
+      - "80:80"
+    volumes:
+      - "./src/php:/var/www/html"
+  php:
+    container_name: "php"
+    build:
+      dockerfile: "./container/php/Dockerfile"
+    ports:
+      - "9000:9000"
+      - "5173:5173"
+    volumes:
+      - "./src/php:/var/www/html"
+  db:
+    container_name: "db"
+    image: postgres:14-alpine
+    restart: always
+    shm_size: 256mb
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=${POSTGRES_HOST_AUTH_METHOD}"
+      - "POSTGRES_USER=${POSTGRES_USER}"
+      - "POSTGRES_DB=${POSTGRES_DB}"
+      - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}"
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    ports:
+      - 8888:80
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: example@example.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    depends_on:
+      - db
