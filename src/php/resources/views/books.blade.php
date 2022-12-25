@@ -41,6 +41,10 @@
                       <td class="w-1/3 text-left py-3 px-4"><input type="text" name="published" class="form-control"></td>
                     </tr>
                     <tr>
+                      <td class="w-1/3 text-left py-3 px-4">画像</td>
+                      <td class="w-1/3 text-left py-3 px-4"><input type="file" name="item_img"></td>
+                    </tr>
+                    <tr>
                       <td class="w-1/3 text-left py-3 px-4">
                         <div class="m-3">
                           <button class="shadow-lg px-2 py-1  bg-blue-400 text-lg text-white font-semibold rounded  hover:bg-blue-500 hover:shadow-sm hover:translate-y-0.5 transform transition ">
@@ -65,6 +69,7 @@
                     <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">冊数</th>
                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">金額</th>
                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">公開日</td>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">更新</td>
                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">書籍の削除</td>
                   </tr>
                   @foreach ($books as $book)
@@ -75,6 +80,15 @@
                     <td class="w-1/3 text-left py-3 px-4">{{ $book->item_number }}</td>
                     <td class="text-left py-3 px-4">{{ $book->item_amount }}</td>
                     <td class="text-left py-3 px-4">{{ $book->published }}</td>
+
+                    <td>
+                      <form action="{{ url('booksedit/'.$book->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" <button class="px-2 py-1 bg-slate-300 text-white font-semibold rounded hover:bg-red-500">
+                          更新
+                        </button>
+                      </form>
+                    </td>
                     <!-- 本: 削除ボタン -->
                     <td class="text-left py-3 px-4">
                       <form action="{{ url('book/'.$book->id) }}" method="POST">
@@ -83,9 +97,9 @@
                         @method('DELETE')
                         <!-- 擬似フォームメソッド -->
                         <div class="m-3">
-                        <button type="submit" <button class="px-2 py-1 bg-slate-300 text-white font-semibold rounded hover:bg-red-500">
-                          Delete
-                        </button>
+                          <button type="submit" <button class="px-2 py-1 bg-slate-300 text-white font-semibold rounded hover:bg-red-500">
+                            Delete
+                          </button>
                         </div>
                       </form>
                     </td>

@@ -19,10 +19,10 @@ Route::post('/books','App\Http\Controllers\BooksController@store');
 Route::delete('/book/{book}','App\Http\Controllers\BooksController@destroy');
 
 //更新画面
-Route::post('/booksedit/{books}','BooksController@edit');
+Route::post('/booksedit/{books}','App\Http\Controllers\BooksController@edit');
 
 //更新処理
-Route::post('/books/update','BooksController@update');
+Route::post('/books/update','App\Http\Controllers\BooksController@update');
 
 
 
