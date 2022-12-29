@@ -2,3 +2,4 @@
 /db2/
 /pgadmin/
 __init__.py
+.DS_Store
