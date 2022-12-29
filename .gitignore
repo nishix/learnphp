@@ -1,2 +1,4 @@
-/db/
+/db1/
+/db2/
 /pgadmin/
+__init__.py

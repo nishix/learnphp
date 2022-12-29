@@ -4,7 +4,7 @@ RUN apt-get update \
     && apt-get -y install git zip unzip vim libpq-dev
 RUN docker-php-ext-install pdo_pgsql
 
-#nodejs16インストール
+#nodejs18インストール
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt install -y nodejs
 
